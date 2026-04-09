@@ -200,78 +200,56 @@ The component is now ready to use. You can see the preview on the right side of 
         return `import React, { useState } from 'react';
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [focused, setFocused] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission here
+    alert('Message sent!');
   };
 
+  const inputStyle = (field) => ({
+    width: '100%',
+    background: 'transparent',
+    border: 'none',
+    borderBottom: focused === field ? '2px solid #e94560' : '2px solid #2a2a3e',
+    padding: '10px 0',
+    color: '#f0f0f0',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  });
+
+  const labelStyle = { display: 'block', fontSize: '10px', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#8892a4', marginBottom: '4px' };
+
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div style={{ background: '#12121f', padding: '48px', maxWidth: '420px' }}>
+      <h2 className="text-3xl font-black mb-2" style={{ color: '#f0f0f0', letterSpacing: '-0.04em' }}>Get in Touch</h2>
+      <p className="text-sm mb-10" style={{ color: '#8892a4' }}>We respond within 24 hours.</p>
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label style={labelStyle}>Name</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange}
+            onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
+            required style={inputStyle('name')} />
         </div>
-        
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label style={labelStyle}>Email</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange}
+            onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
+            required style={inputStyle('email')} />
         </div>
-        
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label style={labelStyle}>Message</label>
+          <textarea name="message" value={formData.message} onChange={handleChange}
+            onFocus={() => setFocused('message')} onBlur={() => setFocused(null)}
+            required rows={3} style={{ ...inputStyle('message'), resize: 'none' }} />
         </div>
-        
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
-        >
+        <button type="submit" className="w-full py-3 font-bold text-xs uppercase tracking-widest transition-opacity duration-200 hover:opacity-80"
+          style={{ background: 'linear-gradient(90deg, #e94560, #f5a623)', color: '#fff', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}>
           Send Message
         </button>
       </form>
@@ -284,26 +262,27 @@ export default ContactForm;`;
       case "card":
         return `import React from 'react';
 
-const Card = ({ 
-  title = "Welcome to Our Service", 
+const Card = ({
+  title = "Welcome to Our Service",
   description = "Discover amazing features and capabilities that will transform your experience.",
   imageUrl,
-  actions 
+  actions
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)', borderRadius: '2px', overflow: 'hidden', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, #e94560, #f5a623)' }} />
       {imageUrl && (
-        <img 
-          src={imageUrl} 
+        <img
+          src={imageUrl}
           alt={title}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover opacity-80"
         />
       )}
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
+      <div className="p-8">
+        <h3 className="text-2xl font-black tracking-tight mb-3" style={{ color: '#f0f0f0', letterSpacing: '-0.03em' }}>{title}</h3>
+        <p className="text-sm leading-relaxed mb-6" style={{ color: '#8892a4' }}>{description}</p>
         {actions && (
-          <div className="mt-4">
+          <div className="mt-2">
             {actions}
           </div>
         )}
@@ -320,40 +299,32 @@ export default Card;`;
 const Counter = () => {
   const [count, setCount] = useState(0);
 
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  const reset = () => {
-    setCount(0);
-  };
+  const btnStyle = (accent) => ({
+    width: '48px', height: '48px', borderRadius: '0', border: \`1px solid \${accent}\`,
+    background: 'transparent', color: accent, fontSize: '20px', fontWeight: '700',
+    cursor: 'pointer', transition: 'all 0.15s', display: 'flex', alignItems: 'center', justifyContent: 'center',
+  });
 
   return (
-    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Counter</h2>
-      <div className="text-4xl font-bold mb-6">{count}</div>
-      <div className="flex gap-4">
-        <button 
-          onClick={decrement}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-        >
-          Decrease
+    <div className="flex flex-col items-center" style={{ background: '#12121f', padding: '56px 40px' }}>
+      <p className="text-xs font-bold uppercase tracking-widest mb-6" style={{ color: '#8892a4', letterSpacing: '0.2em' }}>Counter</p>
+      <div className="font-black mb-10" style={{ fontSize: '96px', lineHeight: 1, color: '#f0f0f0', letterSpacing: '-0.06em', fontVariantNumeric: 'tabular-nums' }}>
+        {count < 0 ? <span style={{ color: '#e94560' }}>{count}</span> : count}
+      </div>
+      <div className="flex gap-3">
+        <button style={btnStyle('#e94560')} onClick={() => setCount(c => c - 1)}
+          onMouseOver={e => Object.assign(e.currentTarget.style, { background: '#e94560', color: '#fff' })}
+          onMouseOut={e => Object.assign(e.currentTarget.style, { background: 'transparent', color: '#e94560' })}>
+          −
         </button>
-        <button 
-          onClick={reset}
-          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
-        >
-          Reset
+        <button style={{ ...btnStyle('#2a2a3e'), color: '#8892a4', borderColor: '#2a2a3e', fontSize: '11px', fontWeight: '700', letterSpacing: '0.1em', width: 'auto', padding: '0 16px' }}
+          onClick={() => setCount(0)}>
+          RESET
         </button>
-        <button 
-          onClick={increment}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-        >
-          Increase
+        <button style={btnStyle('#4ade80')} onClick={() => setCount(c => c + 1)}
+          onMouseOver={e => Object.assign(e.currentTarget.style, { background: '#4ade80', color: '#12121f' })}
+          onMouseOut={e => Object.assign(e.currentTarget.style, { background: 'transparent', color: '#4ade80' })}>
+          +
         </button>
       </div>
     </div>
@@ -392,13 +363,18 @@ export default Counter;`;
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
-      <div className="w-full max-w-md">
-        <Card 
+    <div className="min-h-screen flex items-center justify-center p-8" style={{ background: '#0d0d14' }}>
+      <div className="w-full max-w-sm">
+        <Card
           title="Amazing Product"
           description="This is a fantastic product that will change your life. Experience the difference today!"
           actions={
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+            <button
+              className="text-xs font-bold uppercase tracking-widest px-6 py-3 transition-all duration-200"
+              style={{ background: 'linear-gradient(90deg, #e94560, #f5a623)', color: '#fff', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}
+              onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
+              onMouseOut={e => e.currentTarget.style.opacity = '1'}
+            >
               Learn More
             </button>
           }
@@ -413,7 +389,7 @@ export default function App() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
+    <div className="min-h-screen flex items-center justify-center p-8" style={{ background: '#0d0d14' }}>
       <div className="w-full max-w-md">
         <${componentName} />
       </div>
