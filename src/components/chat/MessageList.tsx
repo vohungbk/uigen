@@ -4,6 +4,7 @@ import { Message } from "ai";
 import { cn } from "@/lib/utils";
 import { User, Bot, Loader2 } from "lucide-react";
 import { MarkdownRenderer } from "./MarkdownRenderer";
+import { ToolCallBadge } from "./ToolCallBadge";
 
 interface MessageListProps {
   messages: Message[];
@@ -63,21 +64,8 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
                               </div>
                             );
                           case "tool-invocation":
-                            const tool = part.toolInvocation;
                             return (
-                              <div key={partIndex} className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs font-mono border border-neutral-200">
-                                {tool.state === "result" && tool.result ? (
-                                  <>
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span className="text-neutral-700">{tool.toolName}</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Loader2 className="w-3 h-3 animate-spin text-blue-600" />
-                                    <span className="text-neutral-700">{tool.toolName}</span>
-                                  </>
-                                )}
-                              </div>
+                              <ToolCallBadge key={partIndex} toolInvocation={part.toolInvocation} />
                             );
                           case "source":
                             return (
