@@ -1,0 +1,50 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - heading "React Component Generator" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e56]: Create a user profile card component
+            - img [ref=e59]
+          - generic [ref=e62]:
+            - img [ref=e65]
+            - generic [ref=e70]:
+              - paragraph [ref=e72]: This is a static response. You can place an Anthropic API key in the .env file to use the Anthropic API for component generation. Let me create an App.jsx file to display the component.
+              - generic [ref=e75]: Creating App.jsx
+              - separator [ref=e76]
+              - paragraph [ref=e78]: I'll create a Card component for you.
+              - generic [ref=e81]: Creating Card.jsx
+              - separator [ref=e82]
+              - paragraph [ref=e84]: Now let me enhance the component with better styling.
+              - generic [ref=e87]: Editing Card.jsx
+              - separator [ref=e88]
+              - generic [ref=e89]:
+                - paragraph [ref=e90]: "Perfect! I've created:"
+                - list [ref=e91]:
+                  - listitem [ref=e92]:
+                    - strong [ref=e93]: Card.jsx
+                    - text: "- A fully-featured card component"
+                  - listitem [ref=e99]:
+                    - strong [ref=e100]: App.jsx
+                    - text: "- The main app file that displays the component"
+                - paragraph [ref=e101]: The component is now ready to use. You can see the preview on the right side of the screen.
+        - generic [ref=e19]:
+          - textbox "Describe the React component you want to create..." [ref=e20]
+          - button [disabled] [ref=e21]:
+            - img [ref=e22]
+    - separator [ref=e25]
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - tablist [ref=e30]:
+          - tab "Preview" [selected] [ref=e31]
+          - tab "Code" [ref=e32]
+        - generic [ref=e33]:
+          - button "Sign In" [ref=e34]
+          - button "Sign Up" [ref=e35]
+      - iframe [ref=e98]:
+        - generic [ref=f3e6]:
+          - heading "Amazing Product" [level=3] [ref=f3e7]
+          - paragraph [ref=f3e8]: This is a fantastic product that will change your life. Experience the difference today!
+          - button "Learn More" [ref=f3e10] [cursor=pointer]
+  - alert [ref=e46]
